@@ -1,9 +1,23 @@
+import { useState } from 'react';
 import styles from './app.module.css';
 
+const sendFormData = formData => {
+	console.log(formData);
+};
+
 export const App = () => {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [repPass, setRepPass] = useState('');
+
+	const handleSubmit = event => {
+		event.preventDefault();
+		sendFormData({ email, password, repPass });
+	};
+
 	return (
 		<div className={styles.app}>
-			<form className={styles.form}>
+			<form className={styles.form} onSubmit={handleSubmit}>
 				<div className={styles.group}>
 					<label className={styles.label} htmlFor="email">
 						Email:
@@ -13,6 +27,8 @@ export const App = () => {
 						type="email"
 						name="email"
 						id="email"
+						value={email}
+						onChange={({ target }) => setEmail(target.value)}
 					/>
 				</div>
 				<div className={styles.group}>
@@ -24,6 +40,8 @@ export const App = () => {
 						type="password"
 						name="password"
 						id="password"
+						value={password}
+						onChange={({ target }) => setPassword(target.value)}
 					/>
 				</div>
 				<div className={styles.group}>
@@ -35,6 +53,8 @@ export const App = () => {
 						type="password"
 						name="password-repeat"
 						id="password-repeat"
+						value={repPass}
+						onChange={({ target }) => setRepPass(target.value)}
 					/>
 				</div>
 
