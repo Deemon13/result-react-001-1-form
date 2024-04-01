@@ -9,10 +9,54 @@ export const App = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [repPass, setRepPass] = useState('');
+	const [error, setError] = useState(null);
 
 	const handleSubmit = event => {
 		event.preventDefault();
 		sendFormData({ email, password, repPass });
+
+		let newError = null;
+
+		if (repPass === password) {
+			newError = 'Все Ок!';
+		} else {
+			newError = 'Пароли не совпадают!';
+		}
+
+		setError(newError);
+
+		console.log(error);
+	};
+
+	const handlePasswordInput = ({ target }) => {
+		setPassword(target.value);
+
+		let newError = null;
+
+		if (target.value.length > 20) {
+			newError = 'Длина пароля должна быть меньше 20 символов';
+		} else {
+			newError = 'Другие условия!';
+		}
+
+		setError(newError);
+	};
+
+	const handleRepeatPasswordInput = ({ target }) => {
+		setRepPass(target.value);
+
+		// let newError = null;
+
+		// console.log('repPass:', repPass);
+		// console.log('password:', password);
+
+		// if (repPass === password) {
+		// 	newError = 'Все Ок!';
+		// } else {
+		// 	newError = 'Пароли не совпадают!';
+		// }
+
+		// setError(newError);
 	};
 
 	return (
@@ -41,7 +85,7 @@ export const App = () => {
 						name="password"
 						id="password"
 						value={password}
-						onChange={({ target }) => setPassword(target.value)}
+						onChange={handlePasswordInput}
 					/>
 				</div>
 				<div className={styles.group}>
@@ -54,7 +98,7 @@ export const App = () => {
 						name="password-repeat"
 						id="password-repeat"
 						value={repPass}
-						onChange={({ target }) => setRepPass(target.value)}
+						onChange={handleRepeatPasswordInput}
 					/>
 				</div>
 
