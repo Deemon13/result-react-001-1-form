@@ -18,7 +18,7 @@
 	border-radius: 15px;
 }
 
-.group {
+/* .group {
 	margin-bottom: 20px;
 	display: flex;
 	width: 100%;
@@ -41,7 +41,7 @@
 
 .input:focus {
 	transform: scale(1);
-}
+} */
 
 .btn {
 	padding: 10px;
