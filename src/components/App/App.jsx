@@ -29,6 +29,18 @@ export const App = () => {
 			...prevState,
 			[name]: value,
 		}));
+
+		if (!REG_EMAIL.test(value) && name === 'email') {
+			console.log('Invalid email');
+		}
+
+		if (!REG_PASS.test(value) && name === 'password') {
+			console.log('Invalid password');
+		}
+		
+		if (value !== data.password && name === 'checkPassword') {
+			console.log('Passwords not equal');
+		}
 	};
 
 	const handleSubmit = event => {
