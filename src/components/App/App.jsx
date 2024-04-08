@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import styles from './app.module.css';
 import { InputField } from '../../components';
+
+import { useStore } from '../../hooks';
 
 const sendFormData = formData => {
 	console.log(formData);
@@ -11,16 +12,17 @@ const sendFormData = formData => {
 // 	/^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$/;
 
 export const App = () => {
-	const [data, setData] = useState({
-		email: '',
-		password: '',
-		checkPassword: '',
-	});
+	const { getState, updateState, resetState } = useStore();
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		sendFormData(data);
+		sendFormData(getState());
+		resetState();
 	};
+
+	const { email, password, checkPassword } = getState();
+
+	const handleChange = ({ target }) => updateState(target.name, target.value);
 
 	return (
 		<div className={styles.app}>
@@ -29,32 +31,28 @@ export const App = () => {
 					label={'Email:'}
 					htmlFor={'email'}
 					name={'email'}
-					value={data.email}
+					value={email}
 					id={'email'}
 					type={'email'}
-					onChange={({ target }) => setData({ ...data, email: target.value })}
+					onChange={handleChange}
 				/>
 				<InputField
 					label={'Пароль:'}
 					htmlFor={'password'}
 					name={'password'}
-					value={data.password}
+					value={password}
 					id={'password'}
 					type={'password'}
-					onChange={({ target }) =>
-						setData({ ...data, password: target.value })
-					}
+					onChange={handleChange}
 				/>
 				<InputField
 					label={'Повтор пароля:'}
 					htmlFor={'checkPassword'}
 					name={'checkPassword'}
-					value={data.checkPassword}
+					value={checkPassword}
 					id={'checkPassword'}
 					type={'password'}
-					onChange={({ target }) =>
-						setData({ ...data, checkPassword: target.value })
-					}
+					onChange={handleChange}
 				/>
 				<button className={styles.btn} type="submit">
 					Зарегистрироваться
