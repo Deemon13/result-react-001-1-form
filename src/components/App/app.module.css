@@ -18,6 +18,10 @@
 	border-radius: 15px;
 }
 
+.error {
+	color: red;
+}
+
 /* .group {
 	margin-bottom: 20px;
 	display: flex;
