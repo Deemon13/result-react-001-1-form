@@ -1,5 +1,7 @@
 # result-react-004-1-form
 
+Simple react app of emulating user Log In
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some
